@@ -1,30 +1,59 @@
 nomeHeroi = "Cauly"
 xpHeroi = 8000
-frase1 = "O herói de nome "
-frase2 = " está no nível de "
-rankHeroi = ["Ferro", "Bronze", "Prata", "Ouro", "Platina", "Ascendente", "Imortal", "Radiante"]
+frasesOutput = [
+    "O herói de nome ",
+    " está no nível de ",
+    "."
+]
+ranksHeroi = {
+    "Ferro": {
+        "rank": "Ferro",
+        "eloMin": xpHeroi >= 0,
+        "eloMax": xpHeroi < 1000
+    },
+    "Bronze": {
+        "rank": "Bronze",
+        "eloMin": xpHeroi >= 1001,
+        "eloMax": xpHeroi <= 2000
+    },
+    "Prata": {
+        "rank": "Prata",
+        "eloMin": xpHeroi >= 2001,
+        "eloMax": xpHeroi <= 5000
+    },
+    "Ouro": {
+        "rank": "Ouro",
+        "eloMin": xpHeroi >= 5001,
+        "eloMax": xpHeroi <= 7000
+    },
+    "Platina": {
+        "rank": "Platina", 
+        "eloMin": xpHeroi >= 7001,
+        "eloMax": xpHeroi <= 8000
+    },
+    "Ascendente": {
+        "rank": "Ascendente",
+        "eloMin": xpHeroi >= 8001,
+        "eloMax": xpHeroi <= 9000
+    },
+    "Imortal": {
+        "rank": "Imortal",
+        "eloMin": xpHeroi >= 9001,
+        "eloMax": xpHeroi < 10000
+    },
+    "Radiante": {
+        "rank": "Radiante",
+        "eloMin": xpHeroi >= 10001,
+        "eloMax": float('inf')
+    }
+}
+def encontrarRankHeroi():
+    for rank, limites in ranksHeroi.items():
+        if limites['eloMin'] and limites['eloMax']:
+            return limites['rank']
+    return "Herói sem rank."
 
-if xpHeroi < 1000:
-    print(frase1 + nomeHeroi + frase2 + rankHeroi[0] + ".")
-
-elif xpHeroi > 1001 and xpHeroi <= 2000:
-    print(frase1 + nomeHeroi + frase2 + rankHeroi[1] + ".")
-
-elif xpHeroi > 2000 and xpHeroi <= 5000:
-    print(frase1 + nomeHeroi + frase2 + rankHeroi[2] + ".")
-
-elif xpHeroi > 5000 and xpHeroi <= 7000:
-    print(frase1 + nomeHeroi + frase2 + rankHeroi[3] + ".")
-
-elif xpHeroi > 7000 and xpHeroi <= 8000:
-    print(frase1 + nomeHeroi + frase2 + rankHeroi[4] + ".")
-
-elif xpHeroi > 8000 and xpHeroi <= 9000:
-    print(frase1 + nomeHeroi + frase2 + rankHeroi[5] + ".")
-
-elif xpHeroi > 9000 and xpHeroi <= 10000: 
-    print(frase1 + nomeHeroi + frase2 + rankHeroi[6] + ".")
-
-else:
-    xpHeroi >= 10001
-    print(frase1 + nomeHeroi + frase2 + rankHeroi[7] + ".")
+rankDoHeroi = encontrarRankHeroi()
+if rankDoHeroi != "Herói sem rank.":
+    print(frasesOutput[0] + nomeHeroi + frasesOutput[1] + rankDoHeroi + frasesOutput[2])
+else:  print("Herói fora do ranking!")
